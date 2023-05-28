@@ -31,6 +31,13 @@ const Register = async (_, res) => {
         })
 
         console.log(data)
+        if(data.msg !== 'registration success'){
+            return res.json({
+                error: {
+                    message: 'Registration Failed'
+                }
+            })
+        }
 
         const account = await Accounts.create({
             email: email,
@@ -43,6 +50,7 @@ const Register = async (_, res) => {
 
         res.json({
             success: true,
+            account: account
         })
     }
     catch(err){
