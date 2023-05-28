@@ -46,8 +46,8 @@ const DoTask = async (_, res) => {
         var {data} = await axios.post(`https://ht.onlinemining.vip/index.php/api/user/login?_t=${Date.now()}`, formData, {
             headers: headers("", userAgent)
         })
-        console.log(data)
         if(data.msg !== 'login successful'){
+            console.log('Login Failed')
             return res.json({
                 error: {
                     message: 'Login Failed'
@@ -87,7 +87,6 @@ const DoTask = async (_, res) => {
         var {data} = await axios.post(`https://ht.onlinemining.vip/index.php/api/task/lingqu?_t=${Date.now()}`, formData, {
             headers: headers(token, userAgent)
         })
-        console.log(data?.data)
 
         // Get User Details - Balance
         var {data} = await axios.post(`https://ht.onlinemining.vip/index.php/api/Op/getMyinfo?_t=${Date.now()}`, JSON.stringify({}), {
