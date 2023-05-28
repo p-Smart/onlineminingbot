@@ -23,17 +23,17 @@ app.get('/register-account', Register)
 app.get('/do-task', DoTask)
 
 
-app.get('/test', async (_, res) => {
-  const result = await Accounts.updateMany( {}, {
-    // last_task_done: new Date()
-    working: false,
-    })
+// app.get('/test', async (_, res) => {
+//   const result = await Accounts.updateMany( {}, {
+//     // last_task_done: new Date()
+//     working: false,
+//     })
 
-  res.json({
-    success: true,
-    result: result
-  });
-})
+//   res.json({
+//     success: true,
+//     result: result
+//   });
+// })
 
 
 
