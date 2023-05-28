@@ -15,6 +15,7 @@ const DoTask = async (_, res) => {
     
     try{
         const account = await Accounts.findOne({
+            working: false,
             last_task_done: {
                 $not: {
                     $gte: new Date(startOfToday),
@@ -31,8 +32,9 @@ const DoTask = async (_, res) => {
         }
         const userAgent = (new ua()).toString()
 
-        const {email, password, security_code} = account
+        var {email, password, security_code} = account
         console.log('Trying task for ', email)
+        await Accounts.updateOne({email: email}, {working: true})
 
         var formData = JSON.stringify({
             email: email,
@@ -114,7 +116,15 @@ const DoTask = async (_, res) => {
         }
     }
     finally{
-        
+        const changeWorking = async () => {
+            try{
+                await Accounts.updateOne({email: email}, {working: false})
+            }
+            catch(err){
+                await changeWorking()
+            }
+        }
+        await changeWorking()
     }
 }
 

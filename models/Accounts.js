@@ -23,7 +23,8 @@ const AccountsModel = new Schema({
     security_code: detailConfig,
     last_task_done: dateConfig,
     balance: Number,
-    reg_date: dateConfig
+    reg_date: dateConfig,
+    working: boolConfig
   })
 
 const Accounts = mongoose.models.Accounts ||  mongoose.model('Accounts', AccountsModel)

@@ -45,6 +45,7 @@ const Register = async (_, res) => {
             security_code: security_code,
             reg_date: new Date(),
             balance: 0,
+            working: false,
             last_task_done: new Date(new Date().setDate(new Date().getDate() - 1))
         })
 
