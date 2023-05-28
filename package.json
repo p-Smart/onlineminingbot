@@ -1,5 +1,5 @@
 {
-  "name": "onlineminingbit",
+  "name": "onlineminingbot",
   "scripts": {
     "start": "nodemon index.js"
   },
