@@ -29,19 +29,22 @@ const getRandomState = (states=statesInNigeria) => states[Math.floor(Math.random
 
 const genUserAgent = () => new ua().toString().replace(/\/[^/]* (?=[^ ]*$)/, `/${genIp()} `)
 
-let firstNames = ['Ade', 'Bisi', 'Chidi', 'Dapo', 'Emeka', 'Femi', 'Gbolahan', 'Hassan', 'Ini', 'Jide', 'Kunle', 'Lola', 'Musa', 'Ngozi', 'Obi', 'Peter', 'Qudus', 'Rahman', 'Sade', 'Tayo', 'Uche', 'Vivian', 'Wale', 'Xavier', 'Yemi', 'Zainab', 'Abdul', 'Bello', 'Chinwe', 'David', 'Ebere', 'Folake', 'Ganiyu', 'Hauwa', 'Ifeoma', 'Jumoke', 'Kemi', 'Lanre', 'Musa', 'Nnamdi', 'Olu', 'Paul', 'Queen', 'Rita', 'Sadiq', 'Tunde', 'Umar', 'Victoria', 'Yusuf', 'Zakiyyah'];
-let lastNames = ['Adebayo', 'Balogun', 'Chukwu', 'Dike', 'Eze', 'Fashola', 'Gbadamosi', 'Hammed', 'Ibrahim', 'Jaja', 'Kalu', 'Lasisi', 'Mohammed', 'Nwosu', 'Okafor', 'Peters', 'Quadri', 'Rashid', 'Sule', 'Taiwo', 'Udoh', 'Victoria', 'Williams', 'Xiao', 'Yusuf', 'Zakari', 'Abubakar', 'Babatunde', 'Chukwuma', 'Danjuma', 'Eke', 'Fadairo', 'Gbadegesin', 'Hassan', 'Igwe', 'Johnson', 'Kalu', 'Lawal', 'Musa', 'Nwankwo', 'Ojo', 'Pius', 'Quadri', 'Rasheed', 'Sulaimon', 'Tijani', 'Udoh', 'Violet', 'Yahaya', 'Zubair'];
+const generateRandomIps = count => Array.from({ length: count }, () => Array.from({ length: 4 }, () => Math.floor(Math.random() * 256)).join('.')).join(', ')
 
-let domains = ['gmail', 'yahoo', 'hotmail', 'live'];
-let extensions = ['com', 'ng'];
+let firstNames = ['Abdulahi', 'Adaeze', 'Adeola', 'Adesuwa', 'Ahmed', 'Aisha', 'Akpan', 'Amara', 'Anuoluwa', 'Ayomide', 'Bello', 'Chiamaka', 'Chioma', 'Chukwuemeka', 'Daniel', 'Ebere', 'Efe', 'Ego', 'Emeka', 'Esther', 'Folake', 'Funke', 'Ganiyu', 'Hassan', 'Ifunanya', 'Ikechukwu', 'Ireti', 'Isaiah', 'Jemima', 'Kehinde', 'Lanre', 'Mariam', 'Mojisola', 'Ngozi', 'Nkem', 'Obinna', 'Ogechi', 'Olumide', 'Onyinyechi', 'Osaze', 'Patience', 'Rashidat', 'Sadiq', 'Segun', 'Suleiman', 'Temitope', 'Uche', 'Uchenna', 'Ugochi', 'Victor', 'Yakubu', 'Yusuf', 'Zainab', 'Zara', 'Zeinab', 'Zainabu', 'Zainat', 'Zaraatu', 'Zulai', 'Zuleikha', 'Zuwaira', 'Zuwairatu', 'Zuwena', 'Adams', 'Agwu', 'Akpan', 'Aminu', 'Ayodele', 'Babatunde', 'Bello', 'Danjuma', 'Ekechukwu', 'Ekwuazi', 'Eze', 'Idowu', 'Ifeanyi', 'Igbo', 'Igwe', 'Ike', 'Ikeh', 'Ilozumba', 'Iwu', 'Kalu', 'Kwame', 'Lai', 'Lawani', 'Mbachu', 'Nwabueze', 'Nwadiogbu', 'Ogunlana', 'Ojo', 'Okagbue', 'Okoli', 'Okonkwo', 'Oladele', 'Olaleye', 'Olowu', 'Onuigbo', 'Onwuzurike', 'Opara', 'Ozoemena', 'Salami', 'Ugwu', 'Ukaegbu', 'Uzoma', 'Zakari', 'Zubair'];
+let lastNames = ['Abdullahi', 'Adeniyi', 'Adeolu', 'Agbaje', 'Akindele', 'Amadi', 'Anikulapo', 'Balogun', 'Chukwuma', 'Duru', 'Egwu', 'Ejiofor', 'Eke', 'Ekwueme', 'Emeka', 'Ibe', 'Ibrahim', 'Idris', 'Igwe', 'Ijeoma', 'Ikechukwu', 'Ikenwa', 'Iloka', 'Jaja', 'Kalu', 'Lawal', 'Madu', 'Mbah', 'Nwachukwu', 'Nwadike', 'Nwosu', 'Obi', 'Odeyemi', 'Odum', 'Ogunbiyi', 'Okafor', 'Okoro', 'Okoye', 'Ola', 'Olawale', 'Olowo', 'Onu', 'Onwuka', 'Opara', 'Oti', 'Owolabi', 'Oyekanmi', 'Oyelade', 'Salisu', 'Uba', 'Ugwu', 'Uzoma', 'Yusuf', 'Zubairu', 'Adams', 'Agwu', 'Akpan', 'Aminu', 'Ayodele', 'Babatunde', 'Bello', 'Danjuma', 'Ekechukwu', 'Ekwuazi', 'Eze', 'Ibrahim', 'Idowu', 'Ifeanyi', 'Igbo', 'Igwe', 'Ike', 'Ikeh', 'Ilozumba', 'Iwu', 'Kalu', 'Kwame', 'Lai', 'Lawani', 'Mbachu', 'Nwabueze', 'Nwadiogbu', 'Nwosu', 'Ogunlana', 'Ojo', 'Okagbue', 'Okoli', 'Okonkwo', 'Oladele', 'Olaleye', 'Olowu', 'Onuigbo', 'Onwuzurike', 'Opara', 'Ozoemena', 'Salami', 'Ugwu', 'Ukaegbu', 'Uzoma', 'Yusuf', 'Zakari', 'Zubair'];
+
+
+let domains = ['gmail', 'yahoo', 'hotmail', 'protonmail', 'icloud']
+let extensions = ['com']
 
 const genDetail = async () => {
-    let firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
-    let lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
-    let domain = domains[Math.floor(Math.random() * domains.length)];
-    let extension = extensions[Math.floor(Math.random() * extensions.length)];
-    let email = `${firstName.toLowerCase()}${lastName.toLowerCase()}${Math.floor(Math.random() * 900) + 100}@${domain}.${extension}`;
-    let randomNumber = Math.floor(Math.random() * 900000) + 100000;
+    let firstName = firstNames[Math.floor(Math.random() * firstNames.length)]
+    let lastName = lastNames[Math.floor(Math.random() * lastNames.length)]
+    let domain = domains[Math.floor(Math.random() * domains.length)]
+    let extension = extensions[Math.floor(Math.random() * extensions.length)]
+    let email = `${firstName.toLowerCase()}${lastName.toLowerCase()}${Math.floor(Math.random() * 900)}@${domain}.${extension}`
+    let randomNumber = Math.floor(Math.random() * 900000) + 100000
 
     const duplicate = await Accounts.findOne({email: email})
     if (duplicate){
@@ -60,5 +63,6 @@ module.exports = {
     genTel: genTel,
     genPassword: genPassword,
     genUserAgent: genUserAgent,
-    genDetail: genDetail
+    genDetail: genDetail,
+    generateRandomIps: generateRandomIps
 }

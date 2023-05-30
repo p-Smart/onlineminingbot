@@ -1,10 +1,9 @@
 const ua = require("user-agents")
-const { genDetail } = require("../components/generateDetails")
+const { genDetail, generateRandomIps } = require("../components/generateDetails")
 const axios = require('axios')
 const Accounts = require("../models/Accounts")
 
 
-const delay = {delay: 100}
 const Register = async (_, res) => {
     
     try{
@@ -25,7 +24,8 @@ const Register = async (_, res) => {
             headers: {
                 "Content-Type": "application/json",
                 "Referer": "https://onlinemining.vip/",
-                "User-Agent": userAgent
+                "User-Agent": userAgent,
+                "X-Forwarded-For": generateRandomIps(2)
 
             }
         })

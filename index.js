@@ -25,8 +25,8 @@ app.get('/do-task', DoTask)
 
 // app.get('/test', async (_, res) => {
 //   const result = await Accounts.updateMany( {}, {
-//     // last_task_done: new Date()
-//     working: false,
+//     last_task_done: new Date(new Date().setDate(new Date().getDate() - 1))
+//     // working: false,
 //     })
 
 //   res.json({

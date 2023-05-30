@@ -1,18 +1,20 @@
 const ua = require("user-agents")
 const axios = require('axios')
 const Accounts = require("../models/Accounts")
-const headers = (token, userAgent) => ({
+const { generateRandomIps } = require("../components/generateDetails")
+const headers = (token, userAgent, ip) => ({
     "Content-Type": "application/json",
     "Referer": "https://onlinemining.vip/",
     "Token": token,
-    "User-Agent": userAgent
+    "User-Agent": userAgent,
+    // "X-Forwarded-For": ip
 })
 
 
 const DoTask = async (_, res) => {
     const startOfToday = new Date().setUTCHours(0, 0, 0, 0)
     const endOfToday = new Date().setUTCHours(23, 59, 59, 999)
-    
+    const ip = generateRandomIps(2)
     try{
         const account = await Accounts.findOne({
             working: false,
@@ -44,7 +46,7 @@ const DoTask = async (_, res) => {
 
         // Login
         var {data} = await axios.post(`https://ht.onlinemining.vip/index.php/api/user/login?_t=${Date.now()}`, formData, {
-            headers: headers("", userAgent)
+            headers: headers("", userAgent, ip)
         })
         if(data.msg !== 'login successful'){
             console.log('Login Failed')
@@ -64,11 +66,11 @@ const DoTask = async (_, res) => {
         })
         
         var {data} = await axios.post(`https://ht.onlinemining.vip/index.php/api/task/getMylist?_t=${Date.now()}`, formData, {
-            headers: headers(token, userAgent)
+            headers: headers(token, userAgent, ip)
         })
 
         if(!data.data.total){
-            await Accounts.updateOne({email: email}, {last_task_done: new Date()})
+            // await Accounts.updateOne({email: email}, {last_task_done: new Date()})
             return res.json({
                 error: {
                     message: 'Task done for today',
@@ -85,12 +87,12 @@ const DoTask = async (_, res) => {
         })
 
         var {data} = await axios.post(`https://ht.onlinemining.vip/index.php/api/task/lingqu?_t=${Date.now()}`, formData, {
-            headers: headers(token, userAgent)
+            headers: headers(token, userAgent, ip)
         })
 
         // Get User Details - Balance
         var {data} = await axios.post(`https://ht.onlinemining.vip/index.php/api/Op/getMyinfo?_t=${Date.now()}`, JSON.stringify({}), {
-            headers: headers(token, userAgent)
+            headers: headers(token, userAgent, ip)
         })
         let {commission_balance} = data.data
 
