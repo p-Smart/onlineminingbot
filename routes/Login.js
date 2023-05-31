@@ -12,7 +12,7 @@ const headers = (token, userAgent, ip) => ({
 
 
 const DoTask = async (_, res) => {
-    const startOfToday = new Date().setUTCHours(0, 0, 0, 0)
+    const startOfToday = new Date().setUTCHours(4, 0, 0, 0)
     const endOfToday = new Date().setUTCHours(23, 59, 59, 999)
     const ip = generateRandomIps(2)
     try{
